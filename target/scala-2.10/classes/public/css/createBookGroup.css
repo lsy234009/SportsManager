@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+.btn_group{
+display:block;
+width:183px;
+height:20px;
+border-bottom-style: none;
+border-left-style: none;
+border-right-style: none;
+border-top-style: none;
+cursor: pointer;
+background:#eee;
+text-align:center;
+font-size:12px;
+padding-top:2px; 
+float: left;
+}
+#m1{
+	width:733px;
+	height:497px;
+}
+.modal-header{
+	width:700px;
+	height:428px;
+}
+td{
+	cursor: pointer;
+	width:120px;
+}
+table{
+	margin-left:auto;
+	margin-right: auto;
+}
+tr{
+	line-height: 30px;
+}
+.bookgroup tr{
+	width:700px;
+}
+table td:hover{
+	background-color: whiteSmoke;
+}
+tr:nth-child(even){
+	background-color: #F9F9F9;
+}

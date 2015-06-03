@@ -1,0 +1,373 @@
+/** 鐢ㄦ埛璁惧畾寮瑰嚭绐楃殑鏍峰紡 */
+.modal.fade.in {
+    top: 10%;
+}
+.modal.fade {
+    top: -25%;
+    transition: opacity 0.3s linear 0s, top 0.3s ease-out 0s;
+}
+.fade.in {
+    opacity: 1;
+}
+.hide {
+    display: none;
+}
+.modal {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    z-index: 1050;
+    width: 560px;
+    margin-left: -280px;
+    -webkit-border-radius:6px;
+	-moz-border-radius:6px;
+   	border-radius:6px;
+	-webkit-box-shadow:0 3px 7px rgba(0,0,0,0.3);
+	-moz-box-shadow:0 3px 7px rgba(0,0,0,0.3);
+    outline: medium none;
+    box-shadow: 0px 3px 7px rgba(0, 0, 0, 0.3);
+    background-clip: padding-box;
+    -webkit-background-clip:padding-box;
+	-moz-background-clip:padding-box;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+.fade {
+    opacity: 0;
+    transition: opacity 0.15s linear 0s;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000000;
+}
+.modal-backdrop.fade {
+  opacity: 0;
+}
+.modal-backdrop,
+.modal-backdrop.fade.in {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+.modal-header{
+    color: white;
+    padding: 10px 20px;
+    background-size: 100% auto;
+    background-image: -moz-linear-gradient(top , rgb(89, 147, 231), rgb(51, 101, 203));
+	background-image: -o-linear-gradient(top , rgb(89, 147, 231), rgb(51, 101, 203));
+	background-image: linear-gradient(top , rgb(89, 147, 231), rgb(51, 101, 203));
+	background-image: -webkit-linear-gradient(top , #5993e7, #3365cb);
+    border-top-left-radius: 6px;
+    -moz-border-radius-topleft: 6px;
+	-webkit-border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	-webkit-border-top-left-radius: 6px;
+    font-family: "Microsoft YaHei",寰蒋闆呴粦浣�SimHei;
+}
+.modal-title {
+    padding: 12px 0px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: "Microsoft YaHei",寰蒋闆呴粦浣�SimHei;
+}
+.modal-body {
+    max-height: 430px;
+    padding-bottom: 0px;
+    height: 430px;
+    padding: 20px;
+	overflow: hidden;
+}
+.modal-footer {
+    background: none repeat scroll 0% 0% white;
+    margin: 0px 20px;
+    padding: 20px 0px;
+    text-align: right;
+    border-top: 1px solid rgb(221, 221, 221);
+    -webkit-border-radius:0 0 6px 6px;
+	-moz-border-radius:0 0 6px 6px;
+	border-radius: 0px 0px 6px 6px;
+	-webkit-box-shadow:inset 0 1px 0 #ffffff;
+	-moz-box-shadow:inset 0 1px 0 #ffffff;
+	box-shadow: 0px 1px 0px rgb(255, 255, 255) inset;
+}
+.nt-btn-submit {
+    padding: 10px 20px;
+    background-color: rgb(3, 3, 3);
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-ms-border-radius:5px;
+	-o-border-radius:5px;
+    border: 1px solid rgb(81, 155, 65);
+    min-width: 90px;
+}
+.nt-btn-submit, .nt-btn-submit[disabled]:hover, .nt-btn-submit[disabled]:active {
+    text-shadow: 0px -1px 0px rgb(39, 99, 26);
+    box-shadow: 0px 2px 0px rgb(227, 227, 227);
+    background-image: -moz-linear-gradient(top , rgb(128, 197, 112), rgb(89, 171, 70));
+    background-image: -webkit-linear-gradient(top , rgb(128, 197, 112), rgb(89, 171, 70));
+	background-image: -o-linear-gradient(top , rgb(128, 197, 112), rgb(89, 171, 70));
+	background-image: linear-gradient(top , rgb(128, 197, 112), rgb(89, 171, 70));
+    background-size: 100% auto;
+}
+.nt-btn-dark {
+    background-color: rgb(3, 3, 3);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(81, 81, 81);
+    border-radius: 5px;
+    -webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-ms-border-radius:5px;
+	-o-border-radius:5px;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    min-width: 90px;
+    margin-left: 10px;
+}
+.nt-btn-dark, .nt-btn-dark[disabled]:hover, .nt-btn-dark[disabled]:active {
+    text-shadow: 0px -1px 0px black;
+    box-shadow: 0px 2px 0px rgb(227, 227, 227);
+    background-size: 100% auto;
+    background-image: -moz-linear-gradient(top , rgb(109, 109, 109), rgb(67, 67, 67));
+    background-image: -webkit-linear-gradient(top , rgb(109, 109, 109), rgb(67, 67, 67));
+	background-image: -o-linear-gradient(top , rgb(109, 109, 109), rgb(67, 67, 67));
+	background-image: linear-gradient(top , rgb(109, 109, 109), rgb(67, 67, 67));
+}
+.nt-btn-submit:hover {
+    box-shadow: 0px 1px 2px rgb(167, 167, 167);
+    background-size: 100% auto;
+    background-image: -moz-linear-gradient(top , rgb(141, 217, 123), rgb(105, 187, 86));
+    background-image: -webkit-linear-gradient(top , rgb(141, 217, 123), rgb(105, 187, 86));
+	background-image: -o-linear-gradient(top , rgb(141, 217, 123), rgb(105, 187, 86));
+	background-image: linear-gradient(top , rgb(141, 217, 123), rgb(105, 187, 86));
+}
+.nt-btn-dark:hover {
+    background-size: 100% auto;
+    box-shadow: 0px 1px 2px rgb(167, 167, 167);
+    background-image: -moz-linear-gradient(top , rgb(109, 109, 109), rgb(34, 34, 34));
+    background-image: -webkit-linear-gradient(top , rgb(109, 109, 109), rgb(34, 34, 34));
+	background-image: -o-linear-gradient(top , rgb(109, 109, 109), rgb(34, 34, 34));
+	background-image: linear-gradient(top , rgb(109, 109, 109), rgb(34, 34, 34));
+}
+.nt-btn-submit:active {
+    color: rgb(214, 242, 208);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+    text-shadow: 0px -1px 0px rgb(91, 166, 74);
+}
+.nt-btn-dark:active {
+    color: rgb(204, 204, 204);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3) inset;
+    text-shadow: 0px -1px 0px rgb(68, 68, 68);
+}
+.control-group {
+    margin-bottom: 10px;
+}
+#examiSettings>.control-group {
+    margin-bottom: 30px !important;
+}
+.control-label {
+    width: 115px;
+    float: left;
+	padding-top: 5px;
+	text-align: right;
+	color: rgb(142, 94, 25);
+	font-weight: bold;
+	font-size: 15px;
+	cursor: default;
+	font-family: "Microsoft YaHei",寰蒋闆呴粦浣�SimHei;
+}
+.controls {
+    margin-left: 130px;
+    font-family: "Microsoft YaHei",寰蒋闆呴粦浣�SimHei;
+}
+.nt-input-inspect{
+
+}
+.controls>input[type="text"],
+.controls>input[type="password"] {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(204, 204, 204);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    display: inline-block;
+	height: 18px;
+	padding: 4px 6px;
+	margin-bottom: 9px;
+	font-size: 13px;
+	line-height: 18px;
+	color: rgb(85, 85, 85);
+	border-radius: 3px;
+	width: 210px;
+	font-family: "Microsoft YaHei",寰蒋闆呴粦浣�SimHei;
+}
+input[type="radio"]:hover,
+input[type="submit"]:hover{
+	cursor: pointer;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0px none;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(82, 168, 236, 0.6);
+}
+.search>input:focus{
+	box-shadow: none;
+}
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+select[readonly],
+textarea[readonly] {
+    cursor: not-allowed;
+    background-color: rgb(238, 238, 238) !important;
+}
+button{
+	cursor: pointer;
+	font-family: "Microsoft YaHei",寰蒋闆呴粦浣�SimHei;
+}
+label{
+	display: inline;
+	cursor: pointer;
+}
+.controls>div>label{
+	font-size: 14px;
+}
+.help-inline{
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 5px;
+	margin-bottom: 0px;
+}
+.hide{
+	display: none;
+}
+.icon-ok:before {
+    content: "鈥�;
+    /* color: #31CD31; */
+}
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+}
+.nt-navtabs {
+	margin-top: -23px;
+	right: 20px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	position: absolute;
+	text-align: center;
+	font-weight: 600;
+	border-radius: 4px;
+	background-color: white;
+	border: 1px solid gainsboro;
+	display: inline-block;
+	background-size: 100% auto;
+	height: 35px;
+	border-bottom: medium none;
+	color: white;
+    font-family: "Microsoft YaHei",寰蒋闆呴粦浣�SimHei;
+}
+a, a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+.nt-navtabs a.active {
+	background-image: none;
+	background-color: white;
+	background-size: 100% auto;
+	color: rgb(119, 119, 119);
+}
+.nt-navtabs>.active:hover{
+	color: rgb(119, 119, 119) !important;
+	background-image: none !important;
+}
+.nt-navtabs a:hover {
+    color: white;
+    background-size: 100% auto;
+    background-image: -moz-linear-gradient(top , rgb(51, 101, 203), rgb(89, 147, 231));
+    background-image: -webkit-linear-gradient(top , rgb(51, 101, 203), rgb(89, 147, 231));
+	background-image: -o-linear-gradient(top , rgb(51, 101, 203), rgb(89, 147, 231));
+	background-image: linear-gradient(top , rgb(51, 101, 203), rgb(89, 147, 231));
+
+}
+.nt-navtabs a {
+    padding: 0px 10px;
+    width: auto;
+    font-size: 14px;
+    min-width: 55px;
+    line-height: 32px;
+    border-right: 1px solid gainsboro;
+    float: left;
+    color: white;
+    background-image: -moz-linear-gradient(top , rgb(89, 147, 231), rgb(51, 101, 203));
+    background-image: -webkit-linear-gradient(top , rgb(89, 147, 231), rgb(51, 101, 203));
+	background-image: -o-linear-gradient(top , rgb(89, 147, 231), rgb(51, 101, 203));
+	background-image: linear-gradient(top , rgb(89, 147, 231), rgb(51, 101, 203));
+}
+.nt-navtabs a:first-child {
+	-webkit-border-radius:4px 0 0 0px;
+	-moz-border-radius:4px 0 0 0px;
+	-ms-border-radius:4px 0 0 0px;
+	-o-border-radius:4px 0 0 0px;
+	border-radius:4px 0 0 0px;
+}
+.lang-img{
+	padding-left: 4px;
+}
+.colorSpan1{
+	width: 35px;
+	height: 11px;
+	background-color: rgb(82, 79, 125);
+	display: inline-block;
+}
+.colorSpan2{
+	width: 35px;
+	height: 11px;
+	background-color: #5791E5;
+	display: inline-block;
+}
+.colorSpan3{
+	width: 35px;
+	height: 11px;
+	background-color: rgb(184, 169, 163);
+	display: inline-block;
+}
+div.controls>div{
+	float: left;
+	width: 100px;
+	margin-top: 4px;
+}
+div.controls>div>input[type="radio"]{
+	margin-top: 2px;
+	margin-right: 5px;
+}
+
+/** 璇曞嵎璇︾粏鐨勫脊鍑洪〉闈㈡牱寮�*/
+.exam-name{
+	font-size: 14px;
+	margin-top: 9px;
+	padding-left: 5px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.exam-title{
+	font-weight: bold;
+}
+.pointer{
+	cursor: pointer;
+}

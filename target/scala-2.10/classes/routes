@@ -1,0 +1,76 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           	controllers.Application.index()
+GET		/login							controllers.Application.login()
+POST 	/authenticate					controllers.Application.authenticate()
+GET 	/logout							controllers.Application.logout()
+GET		/signup							controllers.Application.signUp()
+POST	/save							controllers.Application.signUpSave()
+
+
+#admin
+GET 	/listUser						controllers.UserAction.list(p:Int ?= 1, s ?= "uploadTime", o ?= "desc", f ?= "")
+GET		/listproject					controllers.ProjectAction.list(p:Int ?= 1, s ?= "updateTime", o ?= "desc", f ?= "")
+GET		/listgame						controllers.GameAction.list(p:Int ?= 1, s ?= "updateTime", o ?= "desc", f ?= "")
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               	controllers.Assets.at(path="/public", file)
+
+
+#Project
+GET 	/project/add					controllers.ProjectAction.create
+POST	/project/save					controllers.ProjectAction.save
+GET		/project/edit/:id				controllers.ProjectAction.edit(id:Long)
+POST	/project/update/:id				controllers.ProjectAction.update(id:Long)
+GET		/project/delete/:id				controllers.ProjectAction.delete(id:Long)
+GET		/project/info/:id				controllers.ProjectAction.info(id:Long)
+
+#Game
+GET 	/game/add						controllers.GameAction.create
+POST	/game/save						controllers.GameAction.save
+GET		/game/edit/:id					controllers.GameAction.edit(id:Long)
+POST	/game/update/:id				controllers.GameAction.update(id:Long)
+GET		/game/delete/:id				controllers.GameAction.delete(id:Long)
+GET		/game/info/:id					controllers.GameAction.info(id:Long)
+
+
+
+
+#user
+GET		/user/create					controllers.UserAction.create
+POST	/user/save						controllers.UserAction.save
+GET		/user/edit/:id					controllers.UserAction.edit(id:Long)
+POST	/user/update/:id				controllers.UserAction.update(id:Long)
+GET		/user/delete/:id				controllers.UserAction.delete(id:Long)
+
+
+
+
+#appliaction service
+GET 	/download/:filename				controllers.json.ServerApi.downloadApp(filename:String)
+
+#Enroll
+GET		/enroll/create					controllers.EnrollAction.create
+POST	/enroll/save					controllers.EnrollAction.save
+GET		/enroll/edit					controllers.EnrollAction.edit
+POST	/enroll/update					controllers.EnrollAction.update
+GET		/listenroll						controllers.EnrollAction.list(p:Int ?= 1,g:Int ?= 0,u:Int?=0)
+GET		/listScore						controllers.EnrollAction.listScore(p:Int ?= 1, g:Int ?= 0, u:Int ?= 0)
+POST	/score							controllers.EnrollAction.updateScore
+GET		/enroll/delete/:id				controllers.EnrollAction.delete(id:Long)
+GET		/scorequicksearch				controllers.EnrollAction.listScoreQuickSearch(p:Int ?= 1, g:Int ?= 0)
+
+
+
+
+
+
+
+
+
+
+		

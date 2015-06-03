@@ -1,0 +1,144 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="kityformula/assets/styles/base.css">
+    <link rel="stylesheet" href="kityformula/assets/styles/ui.css">
+    <link rel="stylesheet" href="kityformula/assets/styles/scrollbar.css">
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+        .kf-editor {
+            width: 780px;
+            height: 380px;
+        }
+        #loading {
+            height: 32px;
+            width: 340px;
+            line-height: 32px;
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            margin-left: -170px;
+            font-family: arial, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+        }
+        #loading img {
+            position: absolute;
+        }
+        #loading p {
+            display: block;
+            position: absolute;
+            left: 40px;
+            top: 0px;
+            margin: 0;
+        }
+
+    </style>
+    <title></title>
+</head>
+<body>
+<div id="kfEditorContainer" class="kf-editor">
+    <div id="tips" class="tips">
+        sorry! Beta版本仅支持IE9及以上版本的浏览器，正式版本将会支持低版本浏览器，谢谢您的关注！
+    </div>
+</div>
+<!--页面中一定要引入internal.js为了能直接使用当前打开dialog的实例变量-->
+ <script src="../../jquery.ajaxSubmits.js" type="text/javascript"></script>
+<!--internal.js默认是放到dialogs目录下的-->
+<script type="text/javascript" src="../dialogs/internal.js"></script>
+
+<script src="kityformula/js/jquery-1.11.0.min.js"></script>
+<script src="kityformula/js/kitygraph.all.js"></script>
+<script src="kityformula/js/kity-formula-render.all.js"></script>
+<script src="kityformula/js/kity-formula-parser.all.min.js"></script>
+<script src="kityformula/js/kityformula-editor.all.min.js"></script>
+
+<script>
+
+
+//恢复 在鼠标点击编辑区时保存的焦点;在输入内容时也保存焦点
+
+    jQuery( function ($) {
+  
+        if ( document.body.addEventListener ) {
+
+            $( "#tips").html('<div id="loading"><img src="kityformula/loading.gif" alt="loading" /><p>正在加载，请耐心等待...</p></div>' );
+
+            var factory = kf.EditorFactory.create( $( "#kfEditorContainer" )[ 0 ], {
+                render: {
+                    fontsize: 24
+                },
+                resource: {
+                    path: "./kityformula/resource/"
+                }
+            } );
+
+            factory.ready( function ( KFEditor ) {
+            	//alert(window.parent.rng.toString());
+                $( "#tips").remove();
+//                 var rng = editor.selection.getRange(),
+//                      img = rng.getClosedNode(),
+//                      imgLatex = img && $(img).attr('data-latex');
+        		var imgLatex=$(".selected_Img",window.parent.document).attr('data-latex');
+        //	   alert(imgLatex);
+                this.execCommand( "render", imgLatex || "\\placeholder" );
+                this.execCommand( "focus" );
+
+                window.kfe = this;
+
+            } );
+
+            dialog.onok = function(){
+            	var url=window.location.href;
+            	var examId=url.substring(url.lastIndexOf("examId=")+7,url.lastIndexOf("&cursorDivId"));
+              	var cursorDivId=url.substring(url.lastIndexOf("cursorDivId")+12,url.lastIndexOf("&range"));
+            	var range=url.substring(url.lastIndexOf("range")+6,url.lastIndexOf("&questionId"));
+            	var questionId=url.substring(url.lastIndexOf("questionId")+11,url.lastIndexOf("&type"))
+            	var type=url.substring(url.lastIndexOf("type")+5,url.length);
+            //	alert("examId:"+examId+"  cursorDivId:"+cursorDivId+"  range:"+range+" questionId:"+questionId+"  type:"+type);
+            	var imgUrl;
+            	
+            	 var obj = window.parent;
+              
+       
+                kfe.execCommand('get.image.data', function(data){
+                	imgUrl=uploadFormula(examId,data.img,cursorDivId,range,questionId,type,latex);
+                var latex = kfe.execCommand('get.source');
+                if($(".selected_Img",window.parent.document).attr('data-latex')==null){
+                    var text="<img class=\"formula_img\" src='"+imgUrl+"' data-latex='" + latex +"'>";
+     		 	    window.parent.rng.insertNode(window.parent.rng.createContextualFragment(text));
+     				var remindInfo = $(obj.document.getElementById(cursorDivId)).prev(); // 取得同级的上一个元素
+     				var html = $(obj.document.getElementById(cursorDivId)).html().trim(); // 输入框中html内容
+     				var text = $(obj.document.getElementById(cursorDivId)).text().trim(); // 输入框中text内容
+     				if(text==""&&html.toLowerCase().indexOf("<img")<0){
+     					$(remindInfo).show();
+     				} else {
+     					$(remindInfo).hide();
+     				}
+                }else{
+                	$(".selected_Img",window.parent.document).attr('src',imgUrl);
+                	$(".selected_Img",window.parent.document).attr('data-latex',latex);
+                	$(".formula_img",window.parent.document).removeClass("selected_Img");
+                }
+          
+
+		        //   editor.execCommand('inserthtml',  '<img class="kfformula" src="'+ imgUrl+'" data-latex="' + latex + '" />');
+		         dialog.close();  
+		         window.parent.document.getElementById(cursorDivId).focus();
+                
+            });
+
+                return false;
+            }
+
+        } else {
+            $( "#tips").css( "color", "black" );
+            $( "#tips").css( "padding", "10px" );
+        }
+    } );
+</script>
+</body>
+</html>

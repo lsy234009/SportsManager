@@ -1,0 +1,8 @@
+/* jquery.page.js css  */
+ul.pages {display:block;border:none;text-transform:uppercase;font-size:12px;margin:10px 0 50px;padding:0;}
+ul.pages li {list-style:none;float:left;border:1px solid #b36d41;text-decoration:none;margin:0 5px 0 0;padding:5px;}
+ul.pages li:hover {border:1px solid #afdfe4;background-color:#afdfe4;}
+ul.pages li.pgEmpty {border:1px solid #f0f0f0;color:#d9d6c3;background-color:#f0f0f0;}
+ul.pages li.thpoint {border:none;cursor:auto; color:#000;}
+ul.pages li.pgCurrent {
+	padding: 4px 4px;border: 3px double #fff; + border-color: #afdfe4;color:#FFF;font-weight:700;background-color:#afdfe4;}
