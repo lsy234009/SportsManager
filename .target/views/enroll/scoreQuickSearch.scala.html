@@ -1,0 +1,83 @@
+@(currentPage: Page, pageIndex:Int, gameId:Int, lang:Lang)
+@import play.i18n._
+@import helper._
+@import helper.twitterBootstrap._
+@import controllers._
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="title header ">
+        @title
+    </th>
+}
+
+@admin_main(Html("UserList"), nav = "admin",adminnav = "score_search", showBar = true,lang) {
+
+	<script type="text/javascript">
+
+		
+		
+	
+	</script>
+
+    @if(flash.containsKey("success")) {
+        <div class="alert alert-success">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>@Messages.get(lang,"Done")</strong> @flash.get("success")
+        </div>
+    } 
+
+ 	<div class="alert alert-info">
+	  	<strong>成绩管理</strong>
+	</div>
+	
+	<div id="form-actions">
+		
+	</div>
+	
+	 @if(currentPage.getTotalRowCount == 0) {
+        <div class="well">
+            <em>@Messages.get(lang,"Nothing_to_display")</em>
+        </div>
+    } else {
+    	<table class="users table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                @header("name",Messages.get(lang,"game"))
+                @header("start_time",Messages.get(lang,"game_user_number"))
+                @header("username",Messages.get(lang,"username"))
+                @header("start_time",Messages.get(lang,"score"))
+                </tr>
+            </thead>
+             <tbody>
+
+                @for(game <- currentPage.getScoreList) {
+                    <tr>
+                    	<td>
+                    	   @game.game.project.title
+                    	</td>
+                    	 <td>
+                        	@game.id
+                        </td>
+                        <td >
+                         @game.user.username
+                        </td>
+                        <td >
+                            <input type="text" id="score_@game.id" readonly value="@game.score"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+         </table>
+         
+    }
+}
+
+            

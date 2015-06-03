@@ -1,0 +1,121 @@
+@(currentPage: Page, pageIndex:Int, gameId:Int, lang:Lang)
+@import play.i18n._
+@import helper._
+@import helper.twitterBootstrap._
+@import controllers._
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="title header ">
+        @title
+    </th>
+}
+
+@admin_main(Html("UserList"), nav = "admin",adminnav = "score", showBar = true,lang) {
+
+	<script type="text/javascript">
+
+		function submitForm() {
+			var gameId =  $("#gameId").val();
+			if(gameId==""){
+				gameId="0";
+			}
+			window.location = "/listScore?g="+gameId;
+		}
+		
+		function updateScore(enrollId) {
+			alert(enrollId);
+			var url = "/score";
+			var textId = "#score_"+enrollId;
+			var score = $(textId).val();
+			alert(score);
+			
+			alert(url);
+			$.post(url,
+			{
+				score:score,
+				id:enrollId
+			},
+			function(data, status){
+				if(data.result == "success"){
+					alert("ok!");
+					
+				}else{
+					alert("推送失败，已经保存，请联系管理员！");
+				}
+			}
+	);
+			
+			
+		
+		}
+		
+	</script>
+
+    @if(flash.containsKey("success")) {
+        <div class="alert alert-success">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>@Messages.get(lang,"Done")</strong> @flash.get("success")
+        </div>
+    } 
+
+ 	<div class="alert alert-info">
+	  	<strong>成绩管理</strong>
+	</div>
+	
+	<div id="form-actions">
+		@les_select("gameId",""+gameId,Game.allGame,Messages.get(lang,"select_all_game"))
+		<a class="btn btn-success pull-right" id="add" href="javascript:submitForm()">@Messages.get(lang,"select_od_and_save")</a>
+	</div>
+	
+	 @if(currentPage.getTotalRowCount == 0) {
+        <div class="well">
+            <em>@Messages.get(lang,"Nothing_to_display")</em>
+        </div>
+    } else {
+    	<table class="users table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                @header("name",Messages.get(lang,"game"))
+                @header("start_time",Messages.get(lang,"game_user_number"))
+                @header("username",Messages.get(lang,"username"))
+                @header("start_time",Messages.get(lang,"score"))
+                @header("start_time",Messages.get(lang,"operation"))
+                </tr>
+            </thead>
+             <tbody>
+
+                @for(game <- currentPage.getScoreList) {
+                    <tr>
+                    	<td>
+                    	   @game.game.project.title
+                    	</td>
+                    	 <td >
+                        	@game.id
+                        </td>
+                        <td >
+                         @game.user.username
+                        </td>
+                        <td >
+                            <input type="text" id="score_@game.id" value="@game.score"/>
+                        </td>
+                        <td>
+                        	 <a href="javascript:updateScore(@game.id)" class="btn btn-primary" style="width:120px;margin-top:5px;">@Messages.get(lang,"updateScore")</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+         </table>
+         
+         
+    }
+}
+
+            

@@ -1,0 +1,64 @@
+@CHARSET "UTF-8";
+div.wrap {
+			padding: 0 0 0 0;
+			font-family: "ヒラギノ角ゴ Pro W3", "メイリオ", "Microsoft YaHei",  "MS PGothic", "MS UI Gothic", Helvetica, Arial, sans-serif;
+		}
+		
+.page-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.test-tree {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: block;
+	font-family: "ヒラギノ角ゴ Pro W3", "メイリオ", "Microsoft YaHei",  "MS PGothic", "MS UI Gothic", Helvetica, Arial, sans-serif;
+}
+
+.clear-element {
+	clear: both;
+}
+
+.parent-item > div,
+.page-item2 > div,
+.page-item3 > div,
+.page-item4 > div {
+		
+	margin: 0.25em 0 0 0;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+
+.sort-handle {
+	cursor:move;
+}
+
+.helper {
+border:2px dashed #777777;
+}
+
+.current-nesting {
+	background-color: yellow;
+}
+
+.bold {
+	color: red;
+	font-weight: bold;
+}
+
+
+
+.bootstrap-tagsinput{
+	height:22px;
+	padding-left:-1px;
+}

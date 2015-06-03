@@ -1,0 +1,38 @@
+@(loginform: Form[Application.Login],lang: Lang)
+@import play.i18n._
+@import helper._
+@import helper.twitterBootstrap._
+@import controllers._
+
+@main(Html("Login"), nav = "login", showBar = false,lang) {
+	
+	
+	@form(action = routes.Application.authenticate(),'class -> "form-vertical",'enctype -> "multipart/form-data"){
+		<script type="text/javascript">
+			function check_pn(){
+				document.forms[0].submit();
+			}
+		</script>
+		<div class="page-header">
+                    <h1 style="text-align:center;">@Messages.get(lang,"systitle")</h1>
+        </div>
+		<div class="control-group" style="margin-top:40px;">
+			<div class="controls" style="margin-left:25%;">
+				@Messages.get(lang,"name")<input type="text" name="username" style="width:60%;background-position:5px -693px;background-repeat: no-repeat;padding:1px 11px 1px 36px;height:32px;" id="inputName" placeholder="@Messages.get(lang,"name")" value="@loginform("name").value">
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls" style="margin-left:25%;">
+				@Messages.get(lang,"pass")<input type="password" name="password" style="width:60%;background-position:5px -734px;background-repeat: no-repeat;padding:1px 11px 1px 36px;height:32px;" id="inputPassword" placeholder="@Messages.get(lang,"pass")">
+			</div>
+			
+		</div>
+		<div class="control-group">
+			<div class="controls" style="margin-left:34%;">
+				<button type="button" onclick="check_pn()" class="login_button" style="background-color:#ec7500;width:100px;height:35px;">@Messages.get(lang,"Sign_in")</button>
+				&nbsp;&nbsp;
+				<button type="button" onclick="window.open('signup','_self')" class="regedit_button" style="background-color:#ec7500;width:100px;height:35px;">@Messages.get(lang,"Sign_Up")</button>
+			</div>
+		</div>
+	}
+}

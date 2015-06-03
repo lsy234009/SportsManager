@@ -1,0 +1,85 @@
+@(userForm: Form[User],lang:Lang)
+@import play.i18n._
+@import helper._
+@import helper.twitterBootstrap._
+@import controllers._
+
+@admin_main(Html("CreateUser"), nav = "admin",adminnav = "user",showBar = true, lang) {
+
+	<script type="text/javascript">
+		
+		function checkUserForm(){
+			var password = $('#password').val();
+			var repassword = $('#repassword').val();
+			
+			if(password != repassword){
+				alert("密码不匹配，请重新输入");
+				return;
+			}
+			
+			document.forms[0].submit();
+		}
+	
+	</script>
+	
+	@form(routes.UserAction.save(), 'class -> "form-horizontal", 'enctype -> "multipart/form-data") {
+		<legend>@Messages.get(lang,"Add_a_new_advertise")</legend>
+		<fieldset>
+			 <div class="control-group ">
+				<label class="control-label" for="title">@Messages.get(lang,"input_user_name")</label>
+				<div class="controls">
+			    	<input type="text" id="username" name="username">
+			    	<span style="color:red;">*</span><br/>
+				</div>
+			</div>
+			
+			<div class="control-group ">
+				<label class="control-label" for="title">@Messages.get(lang,"input_password")</label>
+				<div class="controls">
+			    	<input type="password" id="password" name="password">
+			    	<span style="color:red;">*</span><br/>
+				</div>
+			</div>
+			
+			<div class="control-group ">
+				<label class="control-label" for="title">@Messages.get(lang,"input_repassword")</label>
+				<div class="controls">
+			    	<input type="password" id="repassword" name="repassword">
+			    	<span style="color:red;">*</span><br/>
+				</div>
+			</div>
+			
+			<div class="control-group ">
+				<label class="control-label" for="title">@Messages.get(lang,"input_user_department")</label>
+				<div class="controls">
+			    	<input type="text" id="department" name="department">
+			    	<span style="color:red;">*</span><br/>
+				</div>
+			</div>
+			
+			
+			<div class="control-group ">
+				<label class="control-label" for="title">@Messages.get(lang,"input_remarks")</label>
+				<div class="controls">
+			    	<input type="text" id="remarks" name="remarks">
+			    	<span style="color:red;">*</span><br/>
+				</div>
+			</div>
+			
+			<div class="control-group ">
+				<label class="control-label" for="title">@Messages.get(lang,"select_user_group")</label>
+				<div class="controls">
+			    	@les_select("typeId","",User.userGroup, Messages.get(lang,"select_a_user_group"))
+			    	<span style="color:red;">*</span><br/>
+				</div>
+			</div>
+			
+			
+		</fieldset>
+		
+		<div class="form-actions">
+            <input type="button" onclick="checkUserForm()" value="@Messages.get(lang,"Create_this_user")" class="btn btn-primary"> @Messages.get(lang,"or")
+            <a href="@routes.UserAction.list()" class="btn">@Messages.get(lang,"Cancel")</a> 
+        </div>
+	}
+}

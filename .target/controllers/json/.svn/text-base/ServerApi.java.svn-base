@@ -1,0 +1,110 @@
+package controllers.json;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import models.Advertise;
+import models.Data;
+
+import org.codehaus.jackson.node.ObjectNode;
+
+import controllers.Application;
+
+import play.db.jpa.Transactional;
+import play.libs.Json;
+import play.mvc.Controller;
+import play.mvc.Result;
+
+public class ServerApi extends Controller{
+
+	
+	/*************************************
+	 ***********Advertise*****************
+	 *************************************/
+	
+	@Transactional(readOnly =true)
+	public static Result advertiseJson(long count){
+		ObjectNode result=Json.newObject();
+		response().setContentType("text/json; charset=UTF-8");
+		List<Advertise> advertise = Advertise.getLastUpdate((int) count);
+		result.put("advertise",Json.toJson(advertise));
+		return ok(result);
+	}
+	
+	
+	@Transactional(readOnly =true)
+	public static Result advertiseJsonTypeId(String typeId){
+		ObjectNode result=Json.newObject();
+		response().setContentType("text/json; charset=UTF-8");
+		List<Advertise> advertise = Advertise.getLastUpdateTypeId(typeId);
+		result.put("advertise",Json.toJson(advertise));
+		return ok(result);
+	}
+	
+	@Transactional(readOnly =true)
+	public static Result advertiseJsonByLastId(long lastId, String typeId, long count){
+		ObjectNode result=Json.newObject();
+		response().setContentType("text/json; charset=UTF-8");
+		List<Advertise> advertises = Advertise.getLastUpdateByLastId(lastId, typeId, (int)count);
+		result.put("advertise",Json.toJson(advertises));
+		return ok(result);
+	}
+	
+	@Transactional(readOnly =true)
+	public static Result getJsonById(long id){
+		ObjectNode result=Json.newObject();
+		response().setContentType("text/json; charset=UTF-8");
+		Advertise advertise = Advertise.findById(id);
+		result.put("advertise",Json.toJson(advertise));
+		return ok(result);
+	}
+	
+	
+	
+	
+	
+	/*************************************
+	 ***********Data********************** 
+	 *************************************/
+	@Transactional(readOnly =true)
+	public static Result dataJson() {
+		ObjectNode result = Json.newObject();
+		response().setContentType("text/json; charset=UTF-8");
+		
+		List<Data> datas = Data.getAll();
+		result.put("data", Json.toJson(datas));
+		
+		return ok(result);
+	}
+	
+	
+	
+	/*************************************
+	 ***********Download******************
+	 *************************************/
+	
+	@Transactional(readOnly =true)
+	public static Result downloadApp(String filename){
+		InputStream is = null;
+		String filePath = Application.getfilePath() + "/public/apps/";
+		File imgFile = new File(filePath + filename);
+		try {
+			if (imgFile != null){
+				is = new FileInputStream(imgFile);
+			}
+		} catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		return ok(is);
+	}
+	
+	
+	
+}

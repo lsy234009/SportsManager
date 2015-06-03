@@ -1,0 +1,62 @@
+@(messageForm: Form[Game], lang:Lang)
+@import play.i18n._
+@import helper._
+@import helper.twitterBootstrap._
+@import controllers._
+
+
+@admin_main(Html("CreateGame"), nav = "admin",adminnav="game", showBar = true,lang) {
+
+<script type="text/javascript">
+var GO_LIST = "/listgame";
+function goList(){
+	window.location = GO_LIST;
+}
+
+</script>
+
+@if(flash.containsKey("success")) {
+        <div class="alert alert-success">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>@Messages.get(lang,"done")</strong> @flash.get("success")
+        </div>
+} 
+@if(flash.containsKey("error")) {
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>@Messages.get(lang,"fail")</strong> @flash.get("error")
+        </div>
+} 
+<div class="alert alert-info">
+		  	<strong>查看比赛详情</strong>
+</div>
+        
+@form(routes.GameAction.list(),'class -> "form-horizontal",'enctype -> "multipart/form-data"){
+	<fieldset>
+	<div class="control-group" >
+		<label class="control-label" >@Messages.get(lang,"select_project")</label>
+		<div class="controls" >
+			
+			<input type="text" id="title" readonly name="title" value="@messageForm("project.title").value" placeholder="请输入名称" >
+		</div>
+	</div>
+	<div class="control-group" >
+		<label class="control-label" >@Messages.get(lang,"game_start_time")</label>
+		<div class="controls" >
+			<input id="startTime" class="Wdate"  type="text" name="gameStartTime" readonly value="@messageForm("gameStartTime").value" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endTime\')||\'2099-01-01\'}'})"/> 
+		</div>
+	</div>
+	<div class="control-group" >
+		<label class="control-label" for="itextarea">@Messages.get(lang,"alarm_content")</label>
+		<div class="controls">
+			<textarea class="input-xlarge" id="description" name="description" readonly rows="7" style="width:540px;white-space:nowrap; overflow:auto;" placeholder="请输入描述内容">@messageForm("description").value</textarea>
+		</div>
+	</div>
+	</fieldset>
+	<div style="height:35px;" class="save_button">
+		<input type="button" id="save_button"  value="返回" onClick="goList()"  class="btn btn-primary control_button" style="float:right;margin-right:5px;">
+	</div>
+	
+}
+
+}

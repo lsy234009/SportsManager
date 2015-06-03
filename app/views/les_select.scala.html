@@ -1,0 +1,32 @@
+@(name:String, current:String,map:Map[String, String], default:String ="")
+@import controllers._
+
+@mySelest(nameAndId:String, current:String,map:Map[String, String], default:String)={
+		<select name="@nameAndId" id="@nameAndId">
+			@if(default.trim != ""){
+				<option value="">@default</option>
+			}
+			@for((k,v) <- map){
+				@if(k.equals(current)){
+					<option value="@k" selected>@v</option>
+				}else{
+					<option value="@k">@v</option>
+				}
+		}
+		</select>
+}
+
+@mySelest(name, current, map, default)
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

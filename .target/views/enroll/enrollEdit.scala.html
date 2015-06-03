@@ -1,0 +1,117 @@
+@(currentPage: Page, projectFrom: Form[Game],enrollList:List[Enroll], lang:Lang)
+@import play.i18n._
+@import helper._
+@import helper.twitterBootstrap._
+@import controllers._
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="title header ">
+        @title
+    </th>
+}
+
+@admin_main(Html("UserList"), nav = "admin",adminnav = "game_enroll", showBar = true,lang) {
+
+	<script type="text/javascript">
+		function submitForm() {
+			
+			
+			
+			//$("form").submit();
+			
+			
+			
+			var game_ids = $("input:checked");
+			var ids =new Array();
+			var s="";
+			if(game_ids.length > 0) {
+				s = game_ids[0].value;
+			}
+			
+			for(var i = 1; i< game_ids.length; i++) {
+				ids.push(game_ids[i].value);
+				s = s +"," + game_ids[i].value;
+			}
+			
+			$.post("/enroll/update",
+					{game_id:s},
+					function(data,status) {
+						if(status == "success") {
+							alert("ok");
+						}else{
+							
+						}
+					});
+		}
+		
+	
+	
+	</script>
+
+    @if(flash.containsKey("success")) {
+        <div class="alert alert-success">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>@Messages.get(lang,"Done")</strong> @flash.get("success")
+        </div>
+    } 
+
+ 	<div class="alert alert-info">
+	  	<strong>比赛报名</strong>
+	</div>
+	
+	<div id="form-actions">
+		<a class="btn btn-success pull-right" id="add" href="javascript:submitForm()">@Messages.get(lang,"select_od_and_save")</a>
+	</div>
+	
+	 @if(currentPage.getTotalRowCount == 0) {
+        <div class="well">
+            <em>@Messages.get(lang,"Nothing_to_display")</em>
+        </div>
+    } else {
+    	<table class="users table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                @header("select",Messages.get(lang,"select_game"))
+                @header("title",Messages.get(lang,"project_title"))
+                @header("title",Messages.get(lang,"game_start_time"))
+                </tr>
+            </thead>
+             <tbody>
+
+                @for(game <- currentPage.getGameList) {
+                    <tr>
+                    	<td>
+                    		
+                    		@if(enrollList.exists(_.game.id == game.id)){
+                    			<input type="checkbox" name="game_id" checked value="@game.id"><br>
+                    		}else{
+                    			<input type="checkbox" name="game_id" value="@game.id"><br>
+                    		}
+                    	</td>
+                    
+                        <td >
+                            @game.project.title
+                        </td>
+                        
+                        <td >
+                            @game.gameStartTime
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+         </table>
+         
+         
+    }
+}
+
+            

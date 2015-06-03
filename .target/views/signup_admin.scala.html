@@ -1,0 +1,16 @@
+@(title: Html, nav: String = "", adminnav: String = "", showBar: Boolean = true,lang:Lang)(content: Html)
+@import play.i18n._
+@import controllers._
+
+@head(title, nav, showBar,lang) {
+    <div class="container-fluid"style=" background-color: #eef1f2;">
+		<div class="row-fluid" >
+			
+			<div class="span12" style="position: absolute;margin-left:162px;width:86.5%;">
+				<div class="content" style="height:100%;" >
+					@content
+				</div>
+			</div>
+		</div>
+	</div>
+}

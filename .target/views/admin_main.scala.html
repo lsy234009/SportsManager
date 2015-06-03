@@ -1,0 +1,56 @@
+@(title: Html, nav: String = "", adminnav: String = "", showBar: Boolean = true,lang:Lang)(content: Html)
+@import play.i18n._
+@import controllers._
+
+@head(title, nav, showBar,lang) {
+    <div class="container-fluid"style=" background-color: #eef1f2;">
+		<div class="row-fluid" >
+			<div class="span3" style="width:160px;font-size: 14px; font-family: SimSun; position:fixed;height:100%;" >
+				<div class="well sidebar-nav"style="background-color: #f6f7f8;height:100%;">
+					<ul class="nav nav-list"> 
+                     
+                     	<li class="@("active".when(adminnav == "score_search"))">
+							<a href="/scorequicksearch">成绩快速查询</a>
+						</li>
+						
+						<li class="@("active".when(adminnav == "game_enroll"))">
+							<a href="/enroll/edit">比赛报名</a>
+						</li>
+						@dynamicRole(Application.ADMIN){
+							<li class="@("active".when(adminnav == "score"))">
+								<a href="/listScore">成绩管理</a>
+							</li>
+							
+							<li class="@("active".when(adminnav == "project"))">
+								<a href="/listproject">项目管理</a>
+							</li>
+							
+							<li class="@("active".when(adminnav == "game"))">
+								<a href="/listgame">比赛管理</a>
+							</li>
+							
+							<li class="@("active".when(adminnav == "enroll"))">
+								<a href="/listenroll">报名管理</a>
+							</li>
+						
+							<li class="@("active".when(adminnav == "user"))">
+								<a href="@routes.UserAction.list()">用户管理</a>
+							</li>
+						
+						}
+					
+					
+					</ul>
+				
+				</div>
+			<div class="shadow" style="position: absolute;top:0px;left:177px;width:4px;height:100%;">
+	        </div>
+			</div>
+			<div class="span9" style="position: absolute;margin-left:162px;width:86.5%;">
+				<div class="content" style="height:100%;" >
+					@content
+				</div>
+			</div>
+		</div>
+	</div>
+}

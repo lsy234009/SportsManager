@@ -1,0 +1,70 @@
+@(id:Long, projects:List[Project],messageForm: Form[Game], lang:Lang)
+@import play.i18n._
+@import helper._
+@import helper.twitterBootstrap._
+@import controllers._
+
+
+@admin_main(Html("CreateGame"), nav = "admin",adminnav="game", showBar = true,lang) {
+<script src="@routes.Assets.at("date/WdatePicker.js")" type="text/javascript"></script>
+<script type="text/javascript">
+var GO_LIST = "/listgame";
+function goList(){
+	window.location = GO_LIST;
+}
+
+</script>
+
+@if(flash.containsKey("success")) {
+        <div class="alert alert-success">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>@Messages.get(lang,"done")</strong> @flash.get("success")
+        </div>
+} 
+@if(flash.containsKey("error")) {
+        <div class="alert alert-error">
+            <button class="close" data-dismiss="alert" type="button">×</button>
+            <strong>@Messages.get(lang,"fail")</strong> @flash.get("error")
+        </div>
+} 
+<div class="alert alert-info">
+		  	<strong>修改比赛</strong>
+</div>
+        
+@form(routes.GameAction.update(id),'class -> "form-horizontal",'enctype -> "multipart/form-data"){
+	<fieldset>
+	<div class="control-group" >
+		<label class="control-label" >@Messages.get(lang,"select_project")</label>
+		<div class="controls" >
+			<select name="project.id" id="project.id">
+			@for(proj <- projects){
+				@if(""+proj.id == messageForm("project.id").value){
+					<option value="@proj.id" selected >@proj.title</option>
+				}else{
+					<option value="@proj.id">@proj.title</option>
+				}
+			}
+		</select>
+		</div>
+	</div>
+	<div class="control-group" >
+		<label class="control-label" >@Messages.get(lang,"game_start_time")</label>
+		<div class="controls" >
+			<input class="Wdate" name="gameStartTime"type="text" value="@messageForm("gameStartTime").value" onFocus="WdatePicker({dateFmt:'yyyy年MM月dd日 HH时mm分ss秒'})"/>
+		</div>
+	</div>
+	<div class="control-group" >
+		<label class="control-label" for="itextarea">@Messages.get(lang,"alarm_content")</label>
+		<div class="controls">
+			<textarea class="input-xlarge" id="description" name="description" rows="7" style="width:540px;white-space:nowrap; overflow:auto;" placeholder="请输入描述内容">@messageForm("description").value</textarea>
+		</div>
+	</div>
+	</fieldset>
+	<div style="height:35px;" class="save_button">
+		<input type="submit" id="save_button"  value="保存" onClick=""  class="btn btn-primary control_button" style="float:right;margin-right:5px;">
+		<input type="button" id="save_button"  value="取消" onClick="goList()"  class="btn btn-primary control_button" style="float:right;margin-right:5px;">
+	</div>
+	
+}
+
+}

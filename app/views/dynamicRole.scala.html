@@ -1,0 +1,13 @@
+@(roles:String)(contents: Html)
+@import controllers._
+
+
+@show(role:String,content:Html) = @{
+	var myRoleId = session().get(Application.ROLE_ID)
+	var roleName = User.userGroup().get(myRoleId);
+	if(roleName.equals(role)){
+		content
+	}
+}
+
+@show(roles,contents)

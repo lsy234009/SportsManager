@@ -1,0 +1,14 @@
+@(title: Html, nav: String = "", showBar: Boolean = true,lang:Lang)(content: Html)
+@import play.i18n._
+
+@head(title, nav, showBar,lang) {
+	        <div class="container">
+	            @if(flash.contains("success")) {
+	       			<p class="alert alert-success">
+	                   <button class="close" data-dismiss="alert" type="button">×</button>
+	                    @flash.get("success")
+	                </p>
+	            }
+	            @content
+	        </div>
+}
